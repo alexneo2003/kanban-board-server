@@ -1,0 +1,34 @@
+type Query {
+  columns: [Column]
+  me: Me!
+}
+type Mutation {
+  addColumn(title: String!): Column
+  addCard(id: String!, cardInput: CardInput!): Boolean
+  removeCard(columnId: String!, cardId: String!): Boolean
+  removeColumn(id: String!): Boolean
+  signup(email: String!, name: String!, password: String!): Me!
+  login(email: String!, password: String!): Me!
+  logout: Boolean
+}
+
+type Me {
+  id: ID!
+  email: String!
+  name: String!
+}
+
+type Column {
+  id: ID
+  title: String!
+  cards: [Card]
+}
+
+type Card {
+  id: ID
+  title: String!
+}
+
+input CardInput {
+  title: String!  
+}

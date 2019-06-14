@@ -1,0 +1,26 @@
+{
+  "name": "kanban-server",
+  "description": "",
+  "dependencies": {
+    "apollo-datasource-rest": "latest",
+    "apollo-server-express": "2.6.3",
+    "bcrypt": "3.0.6",
+    "connect-mongo": "2.0.3",
+    "cookie-parser": "1.4.4",
+    "express": "4.17.1",
+    "express-session": "1.16.2",
+    "graphql": "14.3.1",
+    "graphql-import": "latest",
+    "mongoose": "latest"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js localhost 4000"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/graphql": "14.0.1",
+    "nodemon": "1.18.4"
+  }
+}
