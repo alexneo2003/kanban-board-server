@@ -10,7 +10,8 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const app = express();
 const { createDB, models } = require("./db");
-const typeDefs = importSchema(path.join(__dirname, "./schema.graphql"));
+const typeDefs = require("./graphql/typeDefs")
+
 app.use(cookieParser());
 app.use(
   session({
@@ -33,24 +34,27 @@ const db = createDB();
 //  console.log("request", req.headers);
 //  next();
 //});
-const context = req => ({
+const context = (req, res) => ({
   ...req,
+  ...res,
   models,
   db
 });
+
 const server = new ApolloServer({
-  context,
   typeDefs,
   resolvers: {
     ...query,
     ...mutation
   },
+  context,
   introspection: true, // enables introspection of the schema
-  playground: true // enables the actual playground
+  playground: true, // enables the actual playground
+  endpoint: "/graphql",
 });
+
 server.applyMiddleware({
   app,
-  path: "/",
   cors: {
     credentials: true,
     origin: [
@@ -62,9 +66,11 @@ server.applyMiddleware({
     ]
   }
 });
+
 const opts = {
   port: 4000
 };
+
 app.listen(opts, () => {
   console.log(`🚀 Server ready at http://localhost:4000`);
 });

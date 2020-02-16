@@ -8,7 +8,12 @@ const createDB = () =>
   mongoose
     .connect(
       "mongodb+srv://kanban-user:J2Se08VPYPv32R52@cluster0-mggpo.mongodb.net/kanban-board?retryWrites=true&w=majority",
-      { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true }
+      { 
+        useNewUrlParser: true, 
+        useFindAndModify: false, 
+        useCreateIndex: true, 
+        useUnifiedTopology: true 
+      }
     )
     .then(
       () => {
