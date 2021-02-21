@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "kanban-server",
   "builds": [
     {
       "src": "index.js",
@@ -13,5 +12,5 @@
       "dest": "index.js"
     }
   ],
-  "alias": "kanban-server.now.sh"
+  "alias": "kanban-server.vercel.app"
 }
