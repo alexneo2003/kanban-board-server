@@ -36,44 +36,49 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-const db = createDB();
-const context = (req, res) => ({
-  ...req,
-  ...res,
-  models,
-  db,
-});
+createDB()
+  .then((db) => {
+    const context = (req, res) => ({
+      ...req,
+      ...res,
+      models,
+      db,
+    });
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers: {
-    ...query,
-    ...mutation,
-  },
-  context,
-  introspection: true, // enables introspection of the schema
-  playground: true, // enables the actual playground
-  endpoint: '/graphql',
-});
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers: {
+        ...query,
+        ...mutation,
+      },
+      context,
+      introspection: true, // enables introspection of the schema
+      playground: true, // enables the actual playground
+      endpoint: '/graphql',
+    });
 
-server.applyMiddleware({
-  app,
-  cors: {
-    credentials: true,
-    origin: [
-      'https://eeqwu.csb.dev',
-      'https://eeqwu.codesandbox.io',
-      'https://csb-eeqwu-gmkjkvyotg.now.sh',
-      'https://kanban.vercel.app',
-      'http://localhost:3000',
-    ],
-  },
-});
+    server.applyMiddleware({
+      app,
+      cors: {
+        credentials: true,
+        origin: [
+          'https://eeqwu.csb.dev',
+          'https://eeqwu.codesandbox.io',
+          'https://csb-eeqwu-gmkjkvyotg.now.sh',
+          'https://kanban.vercel.app',
+          'http://localhost:3000',
+        ],
+      },
+    });
 
-const opts = {
-  port: 4000,
-};
+    const opts = {
+      port: 4000,
+    };
 
-app.listen(opts, () => {
-  console.log(`🚀 Server ready at http://localhost:4000`);
-});
+    app.listen(opts, () => {
+      console.log(`🚀 Server ready at http://localhost:4000`);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
