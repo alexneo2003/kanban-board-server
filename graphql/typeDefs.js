@@ -34,6 +34,8 @@ const typeDefs = gql`
       sourcePosition: Int!
       destinationPosition: Int!
     ): Response
+    editTitle(title: String!, sourceID: ID!, sourceType: String!): Response
+    changeBoardImage(boardID: ID!, image: String!): Response
   }
 
   type Response {
@@ -82,6 +84,7 @@ const typeDefs = gql`
     title: String!
     columns: [Column]
     owner: User!
+    image: String
   }
 
   type Card {

@@ -1,13 +1,13 @@
 const { ApolloServer } = require('apollo-server-express');
 const { importSchema } = require('graphql-import');
 const express = require('express');
-const query = require('./graphql/query');
-const mutation = require('./graphql/mutation');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const mutation = require('./graphql/mutation');
+const query = require('./graphql/query');
 
 const app = express();
 
@@ -33,7 +33,10 @@ app.use(
       // secure: process.env.NODE_ENV === "production",
       // maxAge: ms("1d")
     },
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create({
+      mongoUrl:
+        'mongodb+srv://kanban-user:J2Se08VPYPv32R52@cluster0-mggpo.mongodb.net/kanban-board?retryWrites=true&w=majority',
+    }),
   })
 );
 createDB()

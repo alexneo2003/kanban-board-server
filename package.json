@@ -2,17 +2,17 @@
   "name": "kanban-server",
   "description": "",
   "dependencies": {
-    "apollo-server-express": "^2.21.0",
+    "apollo-server-express": "^2.23.0",
     "bcryptjs": "^2.4.3",
-    "connect-mongo": "^3.2.0",
+    "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "graphql": "^15.5.0",
     "graphql-import": "^1.0.2",
-    "mongoose": "^5.11.16",
+    "mongoose": "^5.12.5",
     "prettier": "^2.2.1",
-    "vercel": "^21.2.3"
+    "vercel": "^22.0.1"
   },
   "license": "MIT",
   "main": "index.js",
@@ -22,17 +22,17 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
-    "@babel/core": "^7.12.13",
-    "@babel/plugin-proposal-class-properties": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
     "@types/graphql": "14.5.0",
     "babel-eslint": "10.1.0",
-    "eslint": "^7.19.0",
+    "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "2.0.7"
   }
 }

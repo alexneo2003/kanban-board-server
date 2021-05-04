@@ -241,6 +241,77 @@ module.exports = {
         message: 'Board was added',
       };
     },
+    editTitle: async (
+      root,
+      { title, sourceID, sourceType },
+      { req, models }
+    ) => {
+      const { user } = req.session;
+      if (!user) {
+        return {
+          success: false,
+          message: 'User not logged in',
+        };
+      }
+      if (sourceType === 'CARD') {
+        const card = await models.Card.findOne({
+          _id: sourceID,
+          owner: user._id,
+        });
+        if (!card) {
+          return {
+            success: false,
+            message: 'No card find by ID and current logged owner',
+          };
+        }
+        card.title = title;
+        await card.save();
+        return {
+          success: true,
+          message: 'Card title was changed',
+        };
+      }
+      if (sourceType === 'COLUMN') {
+        const column = await models.Column.findOne({
+          _id: sourceID,
+          owner: user._id,
+        });
+        if (!column) {
+          return {
+            success: false,
+            message: 'No column find by ID and current logged owner',
+          };
+        }
+        column.title = title;
+        await column.save();
+        return {
+          success: true,
+          message: 'Column title was changed',
+        };
+      }
+      if (sourceType === 'BOARD') {
+        const board = await models.Board.findOne({
+          _id: sourceID,
+          owner: user._id,
+        });
+        if (!board) {
+          return {
+            success: false,
+            message: 'No boards find by ID and current logged owner',
+          };
+        }
+        board.title = title;
+        await board.save();
+        return {
+          success: true,
+          message: 'Board title was changed',
+        };
+      }
+      return {
+        success: false,
+        message: 'Something went wrong',
+      };
+    },
     signup: async (root, { email, name, password }, { req, models }) => {
       const isUserExist = await models.User.findOne({ email });
       if (isUserExist) {
@@ -287,6 +358,33 @@ module.exports = {
       await req.session.destroy();
       await res.clearCookie('kanbanid');
       return true;
+    },
+    changeBoardImage: async (
+      root,
+      { boardID, image },
+      { req, res, models }
+    ) => {
+      const { user } = req.session;
+      if (!user) {
+        return {
+          success: false,
+          message: 'User not logged in',
+        };
+      }
+      const board = await models.Board.findById({ _id: boardID });
+      if (!board) {
+        return {
+          success: false,
+          message: 'Board not found',
+        };
+      }
+      board.image = image;
+      await board.save();
+
+      return {
+        success: true,
+        message: 'Board updated',
+      };
     },
   },
 };
